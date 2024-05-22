@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'dart:async';
 
@@ -44,16 +46,25 @@ class _TabScanningState extends State<TabScanning> {
           'bluetoothEnabled=${controller.bluetoothEnabled}');
       return;
     }
-    final regions = <Region>[
-      Region(
-        identifier: 'Cubeacon',
-        proximityUUID: 'CB10023F-A318-3394-4199-A8730C7C1AEC',
-      ),
-      Region(
-        identifier: 'BeaconType2',
-        proximityUUID: '6a84c716-0f2a-1ce9-f210-6a63bd873dd9',
-      ),
-    ];
+    var regions = <Region>[];
+    if (Platform.isIOS) {
+      regions = <Region>[
+        Region(
+          identifier: 'Cubeacon',
+          proximityUUID: 'CB10023F-A318-3394-4199-A8730C7C1AEC',
+        ),
+        Region(
+          identifier: 'BeaconType2',
+          proximityUUID: '6a84c716-0f2a-1ce9-f210-6a63bd873dd9',
+        ),
+      ];
+    } else {
+      regions = [
+        Region(
+          identifier: 'all-beacons',
+        ),
+      ];
+    }
 
     if (_streamRanging != null) {
       if (_streamRanging!.isPaused) {
