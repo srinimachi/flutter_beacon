@@ -44,9 +44,11 @@ class FlutterPlatform {
   void requestAuthorization() {
     ActivityCompat.requestPermissions(getActivity(), new String[]{
         Manifest.permission.ACCESS_COARSE_LOCATION,
-        Manifest.permission.ACCESS_FINE_LOCATION
+        Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.BLUETOOTH_SCAN,
     }, FlutterBeaconPlugin.REQUEST_CODE_LOCATION);
   }
+  
 
   boolean checkLocationServicesPermission() {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
