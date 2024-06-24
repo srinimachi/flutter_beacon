@@ -351,7 +351,8 @@
     NSArray *array = arguments;
     for (NSDictionary *dict in array) {
         CLBeaconRegion *region = [FBUtils regionFromDictionary:dict];
-        
+        region.notifyOnEntry = true;
+        region.notifyOnExit = true;
         if (region) {
             [self.regionMonitoring addObject:region];
         }
